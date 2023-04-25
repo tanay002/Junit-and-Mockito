@@ -1,6 +1,5 @@
 package com.mockito.business;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,6 @@ public class TaskBusinessImpl {
 		List<String> todotasks=taskService.retrieveTasks(username);
 		List<String> filteredTasks = todotasks.stream().filter(task->task.contains("Spring")).
 		collect(Collectors.toList());
-		
 		return filteredTasks;
 	}
 }
