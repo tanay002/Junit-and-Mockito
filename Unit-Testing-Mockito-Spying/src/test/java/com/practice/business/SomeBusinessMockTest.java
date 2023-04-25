@@ -6,23 +6,23 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.practice.Business.SomeBusinessImpl;
 import com.practice.data.SomeDataService;
-// When we user the stub we directly hard-code the data ,but when we use the mock
-// we defined programtically
 
+@ExtendWith(MockitoExtension.class)
  class SomeBusinessMockTest {
 
-	 SomeBusinessImpl someBusinessImpl=new SomeBusinessImpl();	
-	SomeDataService someDataServiceMock=mock(SomeDataService.class);
+	@InjectMocks
+	 SomeBusinessImpl someBusinessImpl;	
 	
-/*	@Before
-	void before()
-	{
-		someBusinessImpl.setSomeDataService(someDataServiceMock);
-	}
-	*/
+	@Mock
+	SomeDataService someDataServiceMock;
+	
 	@Test
 	void calculateSumUsingDataService_basic() {
 	someBusinessImpl.setSomeDataService(someDataServiceMock);
