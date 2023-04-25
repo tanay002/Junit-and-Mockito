@@ -2,6 +2,7 @@ package com.practice.business;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 
 class ListMockTest {
 
@@ -72,5 +74,49 @@ class ListMockTest {
 		verify(mock).add(captor.capture());
 		
 	assertEquals("Junit_Learn",captor.getValue());
+	}
+	
+
+	@Test
+	public void multipleArgumentCapturing()
+	{
+		mock.add("Junit_Learn");
+		mock.add("Mockito_Learn");
+		ArgumentCaptor<String> captor=ArgumentCaptor.forClass(String.class);
+		verify(mock,times(2)).add(captor.capture());
+		List<String> allVaules=	captor.getAllValues();
+		assertEquals("Junit_Learn",allVaules.get(0));
+		assertEquals("Mockito_Learn",allVaules.get(1));
+	}
+	
+	@Test
+	public void mocking() {
+		ArrayList arrayListMock = mock(ArrayList.class);
+		System.out.println(arrayListMock.get(0));//null
+		System.out.println(arrayListMock.size());//0
+		arrayListMock.add("Test");
+		arrayListMock.add("Test2");
+		System.out.println(arrayListMock.size());//0
+		when(arrayListMock.size()).thenReturn(5);
+		System.out.println(arrayListMock.size());//5
+	}
+
+	@Test
+	public void spying() {
+		ArrayList arrayListSpy = spy(ArrayList.class);
+		arrayListSpy.add("Test0");
+		System.out.println(arrayListSpy.get(0));//Test0
+		System.out.println(arrayListSpy.size());//1
+		arrayListSpy.add("Test");
+		arrayListSpy.add("Test2");
+		System.out.println(arrayListSpy.size());//3
+		
+		when(arrayListSpy.size()).thenReturn(5);
+		System.out.println(arrayListSpy.size());//5
+		
+		arrayListSpy.add("Test4");
+		System.out.println(arrayListSpy.size());//5
+		
+		verify(arrayListSpy).add("Test4");
 	}
 }
