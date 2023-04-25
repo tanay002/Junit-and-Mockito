@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.practice.Business.SomeBusinessImpl;
@@ -13,35 +14,36 @@ import com.practice.data.SomeDataService;
 
  class SomeBusinessMockTest {
 
+	 SomeBusinessImpl someBusinessImpl=new SomeBusinessImpl();	
+	SomeDataService someDataServiceMock=mock(SomeDataService.class);
+	
+/*	@Before
+	void before()
+	{
+		someBusinessImpl.setSomeDataService(someDataServiceMock);
+	}
+	*/
 	@Test
 	void calculateSumUsingDataService_basic() {
-		SomeBusinessImpl someBusinessImpl=new SomeBusinessImpl();
-		
-	SomeDataService someDataServiceMock=mock(SomeDataService.class);
+	someBusinessImpl.setSomeDataService(someDataServiceMock);
 	when(someDataServiceMock.retrieveAllData()).thenReturn(new int [] {1,2,3});
-	
-		someBusinessImpl.setSomeDataService(someDataServiceMock);
-		int actualResutt=someBusinessImpl.calculateSumUsingDataService();
-		int expectedResult=6;
-		assertEquals(expectedResult, actualResutt);
+	assertEquals(6, someBusinessImpl.calculateSumUsingDataService());
 	}
 	
 	@Test
 	void calculateSumUsingDataService_CheckEmpty() {
-		SomeBusinessImpl someBusinessImpl=new SomeBusinessImpl();
-		someBusinessImpl.setSomeDataService(new SomeDataServiceEmptyStub());
-		int actualResutt=someBusinessImpl.calculateSumUsingDataService();
-		int expectedResult=0;
-		assertEquals(expectedResult, actualResutt);
+		someBusinessImpl.setSomeDataService(someDataServiceMock);
+		when(someDataServiceMock.retrieveAllData()).thenReturn(new int [] {});
+		assertEquals(0, someBusinessImpl.calculateSumUsingDataService());
+
 	}
 	
 	@Test
 	void calculateSumUsingDataService_CheckSingleValueSum() {
-		SomeBusinessImpl someBusinessImpl=new SomeBusinessImpl();
-		someBusinessImpl.setSomeDataService(new SomeDataServiceSingleValueStub());
-		int actualResutt=someBusinessImpl.calculateSumUsingDataService();
-		int expectedResult=7;
-		assertEquals(expectedResult, actualResutt);
+		someBusinessImpl.setSomeDataService(someDataServiceMock);
+		when(someDataServiceMock.retrieveAllData()).thenReturn(new int [] {5});
+		assertEquals(5, someBusinessImpl.calculateSumUsingDataService());
+
 	}
 
 }
