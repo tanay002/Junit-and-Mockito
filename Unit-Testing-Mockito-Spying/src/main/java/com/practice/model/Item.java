@@ -1,20 +1,42 @@
 package com.practice.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+@Entity
 public class Item {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private int price;
-	private int quanitity;
-	public Item(int id, String name, int price, int quanitity) {
+	private int quantity;
+	
+	@Transient
+	private int value;
+	public Item() {
+		super();
+	}
+	public Item(int id, String name, int price, int quantity) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
-		this.quanitity = quanitity;
+		this.quantity = quantity;
 	}
 	public int getId() {
 		return id;
+	}
+	
+	public int getValue() {
+		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -31,15 +53,15 @@ public class Item {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getQuanitity() {
-		return quanitity;
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setQuanitity(int quanitity) {
-		this.quanitity = quanitity;
+	public void setQuantity(int quanitity) {
+		this.quantity = quanitity;
 	}
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", quanitity=" + quanitity + "]";
+		return "Item [id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + "]";
 	}
 	
 	
