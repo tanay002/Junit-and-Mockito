@@ -20,6 +20,6 @@ public class ItemControllerIntegrationTesting {
 	public void contextLoads() throws JSONException
 	{
 		String response=this.testRestTemplate.getForObject("/all-item-from-database", String.class);
-		JSONAssert.assertEquals("[{id:2},{id:3}]", response,false);
+		JSONAssert.assertEquals("[{id:2,name:Apple,price:110},{id:3,name:Orange,price:50}]", response,false);
 	}
 }
