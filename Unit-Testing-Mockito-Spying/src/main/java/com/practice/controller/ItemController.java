@@ -35,14 +35,7 @@ public class ItemController {
 		
 		
 		List<Item> items = itemBusinessService.retriveAllData();
-		Comparator<Item> byPrice=(item1,item2)->item1.getPrice()-item2.getPrice();
-		items=items.stream()
-				.filter(itemss->itemss.getPrice()>40)
-				.sorted(byPrice).collect(Collectors.toList());
-		for(Item item:items)
-		{
-			item.setValue(item.getPrice()*item.getQuantity());
-		}
+		
 		return items;
 	}
 }
