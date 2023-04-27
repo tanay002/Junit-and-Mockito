@@ -8,7 +8,10 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+
+import com.practice.data.ItemRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ItemControllerIntegrationTesting {
@@ -16,6 +19,8 @@ public class ItemControllerIntegrationTesting {
 	@Autowired
 	TestRestTemplate testRestTemplate;
 	
+	// @MockBean
+	// ItemRepository itemRepository;
 	@Test
 	public void contextLoads() throws JSONException
 	{
