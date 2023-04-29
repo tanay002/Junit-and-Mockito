@@ -28,4 +28,15 @@ public class TaskBusinessImplMockTest {
 		List<String> filteredTasks=taskBusinessImpl.retrieveTasksRelatedToDo("Dummy");
 		assertEquals(3, filteredTasks.size());
 	}
+	
+	@Test
+	public void testRetriveTaskRelatedToSpringWithEmptyAay_usingAMock()
+	{
+		TaskService taskServices= mock(TaskService.class);
+		List<String> allTodos = Arrays.asList();
+		when(taskServices.retrieveTasks("Dummy")).thenReturn(allTodos);
+		TaskBusinessImpl taskBusinessImpl=new TaskBusinessImpl(taskServices);
+		List<String> filteredTasks=taskBusinessImpl.retrieveTasksRelatedToDo("Dummy");
+		assertEquals(0, filteredTasks.size());
+	}
 }
