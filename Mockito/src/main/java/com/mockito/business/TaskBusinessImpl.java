@@ -18,8 +18,7 @@ public class TaskBusinessImpl {
 	public List<String> retrieveTasksRelatedToDo(String username)
 	{   
 		List<String> todotasks=taskService.retrieveTasks(username);
-		List<String> filteredTasks = todotasks.stream().filter(task->task.contains("Spring")).
-		collect(Collectors.toList());
+	List<String> filteredTasks=	todotasks.stream().filter(task->task.contains("Spring")).collect(Collectors.toList());
 		return filteredTasks;
 	}
 }
