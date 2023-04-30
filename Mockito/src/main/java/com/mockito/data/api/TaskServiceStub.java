@@ -12,4 +12,10 @@ public class TaskServiceStub implements TaskService{
 				,"Learn Java","Learn Hibernate");
 	}
 
+	@Override
+	public void deleteTask(String task) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

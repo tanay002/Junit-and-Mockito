@@ -7,4 +7,6 @@ import java.util.List;
 public interface TaskService {
 
 	public List<String> retrieveTasks(String user);
+
+    public void deleteTask(String task);
 }

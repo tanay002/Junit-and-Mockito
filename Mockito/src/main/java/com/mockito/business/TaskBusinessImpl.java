@@ -21,4 +21,17 @@ public class TaskBusinessImpl {
 	List<String> filteredTasks=	todotasks.stream().filter(task->task.contains("Spring")).collect(Collectors.toList());
 		return filteredTasks;
 	}
+	
+	public void deleteTasksRelatedToDo(String username)
+	{   
+		List<String> todotasks=taskService.retrieveTasks(username);
+	
+		for(String task: todotasks)
+		{
+			if(!task.contains("Spring"))
+			{
+				taskService.deleteTask(task);
+			}
+		}
+	}
 }
